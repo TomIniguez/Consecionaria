@@ -1,0 +1,137 @@
+@startuml
+
+class Consecionaria{
+-stock : Stock
++Consecionaria()
++agregarVehiculo(Vehiculo): void
++imprimirVelocidadMaxima(): void
++getStock: void
+}
+
+abstract class Auto{
+  +Auto()
+}
+
+class AutoCombustion{
+  +velocidadMaxima(): double
+}
+
+class AutoCombustionGasoil{
+  +velocidadMaxima(): double
+}
+
+class AutoElectrico{
+  +velocidadMaxima(): double
+}
+
+abstract class Cuatriciclo{
++Cuatriciclo()
+}
+
+class CuatricicloCombustion{
+  +velocidadMaxima(): double
+}
+
+class CuatricicloCombustionGasoil{
+  +velocidadMaxima(): double
+}
+
+class CuatriciloElectrico{
+  +velocidadMaxima(): double
+}
+
+abstract class Moto{
++Moto()
+}
+
+class MotoCombustion{
+  +velocidadMaxima(): double
+}
+
+class MotoCombustionGasoil{
+  +velocidadMaxima(): double
+}
+
+class MotoElectrica{
+  +velocidadMaxima(): double
+}
+
+interface Propulsion{
+  +velocidadMaxima(): double
+}
+
+interface PropulsionCombustion{
+}
+
+interface PropulsionElectrica{
+}
+
+class Stock{
+-vehiculos : List<Vehiculo>
+-autos : List<Vehiculo>
+-motos : List<Vehiculo> 
+-cuatris : List<Vehiculo>
+
++Stock()
++contarStock(Vehiculo): int
++agregarVehiculo(Vehiculo): void
++imprimirVelocidadMaxima(): void
++getVehiculos() : List<Vehiculo>
++getAutos() : List<Vehiculo>
++getMotos() : List<Vehiculo>
++getCuatris() : List<Vehiculo>
+}
+
+abstract class Vehiculo{
+{static} contador : int
+#velocidadNominal : double
+-patente : int	
+-precioCompra : double
+-precioVenta : double
+-usado : boolean
+
++Vehiculo()
++getPatente() : int
++getPrecioVenta(): double
++setPrecioVenta(double): void
++getPrecioCompra() : double
++isUsado() : boolean
++getEstado() : String
++getVelocidadNominal() : double
+}
+
+Vehiculo <|-- Auto
+Vehiculo <|-- Moto
+Vehiculo <|-- Cuatriciclo
+
+
+Auto <|-- AutoCombustion
+Auto <|-- AutoCombustionGasoil
+Auto <|-- AutoElectrico
+
+AutoCombustion --|> PropulsionCombustion
+AutoCombustionGasoil --|> PropulsionCombustion
+CuatricicloCombustion --|> PropulsionCombustion
+CuatricicloCombustionGasoil --|> PropulsionCombustion
+MotoCombustion --|> PropulsionCombustion
+MotoCombustionGasoil --|> PropulsionCombustion
+
+AutoElectrico --|> PropulsionElectrica
+CuatriciloElectrico --|> PropulsionElectrica
+MotoElectrica --|> PropulsionElectrica
+
+PropulsionCombustion --|> Propulsion
+PropulsionElectrica --|> Propulsion
+
+Cuatriciclo <|-- CuatricicloCombustion
+Cuatriciclo <|-- CuatricicloCombustionGasoil
+Cuatriciclo <|-- CuatriciloElectrico
+
+Moto <|-- MotoCombustion
+Moto <|-- MotoCombustionGasoil
+Moto <|-- MotoElectrica
+
+Stock *-- Vehiculo
+
+Consecionaria *-- Stock
+@enduml
